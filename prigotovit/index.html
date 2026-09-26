@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Что приготовить из того, что есть дома — ЖИТЬ ПРОЩЕ</title>
+  <meta name="description" content="Напишите, какие продукты есть дома. Получите три подходящих блюда с учётом времени и количества человек.">
+  <link rel="canonical" href="https://zhitproshche.ru/prigotovit/">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="/">ЖИТЬ ПРОЩЕ</a>
+  <nav><a class="current" href="/prigotovit/">Проще приготовить</a><span>Проще ответить</span><span>Проще подарить</span><span>Проще выбрать</span><span>Ещё</span></nav>
+</header>
+<main class="cook-page">
+  <section class="hero compact">
+    <p class="eyebrow">Проще приготовить</p>
+    <h1>Что приготовить из того, что есть дома?</h1>
+    <p class="lead">Напишите продукты — подберём три блюда без лишних покупок.</p>
+  </section>
+  <section class="generator">
+    <form id="food-form">
+      <label for="ingredients">Что есть дома?</label>
+      <textarea id="ingredients" name="ingredients" required maxlength="1000" placeholder="Например: курица, картошка, яйца, сыр, помидоры"></textarea>
+      <button class="link-button" type="button" id="toggle-details" aria-expanded="false">+ Уточнить пожелания</button>
+      <div id="details" class="details" hidden>
+        <fieldset><legend>На сколько человек</legend>
+          <div class="chips"><label><input type="radio" name="people" value="1">1</label><label><input type="radio" name="people" value="2" checked>2</label><label><input type="radio" name="people" value="3">3</label><label><input type="radio" name="people" value="4">4</label><label><input type="radio" name="people" value="5">5+</label></div>
+        </fieldset>
+        <fieldset><legend>Сколько времени</legend>
+          <div class="chips"><label><input type="radio" name="max_time" value="20">до 20 мин</label><label><input type="radio" name="max_time" value="40">до 40 мин</label><label><input type="radio" name="max_time" value="" checked>неважно</label></div>
+        </fieldset>
+        <label for="excluded">Не использовать</label>
+        <input id="excluded" name="excluded" placeholder="Например: лук, грибы, молоко">
+      </div>
+      <button class="primary" type="submit">Подобрать блюда →</button>
+      <p class="micro">Бесплатно. Без регистрации.</p>
+    </form>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <section id="results" class="results" hidden>
+      <h2>Вот что можно приготовить</h2>
+      <div id="cards" class="result-grid"></div>
+      <button id="retry" class="secondary" type="button">Не подходит — предложить ещё 3</button>
+    </section>
+  </section>
+  <section class="next-step">
+    <h2>А если не придумывать ужин каждый день?</h2>
+    <p>Скоро ЖИТЬ ПРОЩЕ сможет составить меню на неделю с учётом продуктов дома и собрать список покупок.</p>
+  </section>
+</main>
+<script src="/assets/config.js"></script>
+<script src="/assets/app.js"></script>
+</body></html>
