@@ -2,7 +2,7 @@
   const form=document.querySelector("#food-form"); if(!form)return;
   let anonymousId=localStorage.getItem("zp_anonymous_id"); if(!anonymousId){anonymousId="zp_"+crypto.randomUUID();localStorage.setItem("zp_anonymous_id",anonymousId)}
   const toggle=document.querySelector("#toggle-details"),details=document.querySelector("#details"),status=document.querySelector("#status"),results=document.querySelector("#results"),cards=document.querySelector("#cards"),retry=document.querySelector("#retry"),recipe=document.querySelector("#recipe-detail");
-  let suggestions=[];
+  let suggestions=[];\n  const split=v=>v.split(/[,;\\n]+/).map(x=>x.trim()).filter(Boolean);
   toggle.addEventListener("click",()=>{const open=details.hidden;details.hidden=!open;toggle.setAttribute("aria-expanded",String(open));toggle.textContent=open?"− Скрыть пожелания":"+ Уточнить пожелания"});
   document.querySelectorAll(".quick-examples span").forEach(chip=>chip.addEventListener("click",()=>{const box=document.querySelector("#ingredients");const items=split(box.value);if(!items.some(x=>x.toLowerCase()===chip.textContent.toLowerCase()))items.push(chip.textContent.toLowerCase());box.value=items.join(", ");box.focus()}));
   const split=v=>v.split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean);
