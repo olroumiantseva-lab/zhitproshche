@@ -105,3 +105,29 @@
 .next-step-photo{display:block;width:42%;min-width:320px;height:230px;object-fit:cover;border-radius:20px}
 @media(max-width:820px){.utility-photo{width:120px;height:90px;flex-basis:120px}.next-step-photo{width:100%;min-width:0;height:220px}}
 @media(max-width:520px){.utility-grid article{align-items:flex-start}.utility-photo{width:100%;height:160px;flex-basis:auto}.next-step-photo{height:180px}}
+
+/* Orange sun-ray accents — cooking page */
+.cook-hero>div:first-child,.cook-hero-art,.generator form,.utility-grid article,.next-step{position:relative}
+.cook-hero>div:first-child::after,
+.cook-hero-art::after,
+.generator form::after,
+.utility-grid article::after,
+.next-step::after{
+  content:"";position:absolute;width:48px;height:42px;pointer-events:none;z-index:3;
+  background:
+    linear-gradient(74deg,transparent 43%,#ff7a00 44% 56%,transparent 57%) 2px 20px/10px 25px no-repeat,
+    linear-gradient(90deg,transparent 43%,#ff7a00 44% 56%,transparent 57%) 19px 5px/10px 27px no-repeat,
+    linear-gradient(106deg,transparent 43%,#ff7a00 44% 56%,transparent 57%) 35px 20px/10px 25px no-repeat;
+}
+.cook-hero>div:first-child::after{right:8px;top:5px;transform:rotate(18deg)}
+.cook-hero-art::after{left:-22px;bottom:18px;transform:rotate(-25deg)}
+.generator form::after{right:18px;top:-19px;transform:rotate(18deg)}
+.utility-grid article:first-child::after{right:16px;top:8px;transform:rotate(25deg) scale(.78)}
+.utility-grid article:nth-child(2)::after{left:12px;bottom:8px;transform:rotate(-35deg) scale(.72)}
+.next-step::after{right:24px;top:13px;transform:rotate(24deg)}
+@media(max-width:820px){
+ .cook-hero>div:first-child::after{right:0;top:0;transform:scale(.75) rotate(18deg)}
+ .generator form::after{right:8px}
+ .utility-grid article::after{transform:scale(.62) rotate(20deg)}
+ .next-step::after{right:8px;top:5px;transform:scale(.68) rotate(24deg)}
+}
