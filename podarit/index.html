@@ -3,7 +3,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Что подарить? Идеи для любого повода и бюджета — ЖИТЬ ПРОЩЕ</title>
 <meta name="description" content="Расскажите, кому выбираете подарок, по какому поводу и на какой бюджет. Предложим несколько подходящих идей.">
-<link rel="canonical" href="https://zhitproshche.ru/podarit/"><link rel="stylesheet" href="/assets/styles.css?v=20261003-4">
+<link rel="canonical" href="https://zhitproshche.ru/podarit/"><link rel="stylesheet" href="/assets/styles.css?v=20261003-5">
 <script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113177540','ym');ym(113177540,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:true,trackLinks:true});</script>
 </head><body>
 <noscript><div><img src="https://mc.yandex.ru/watch/113177540" style="position:absolute;left:-9999px" alt=""></div></noscript>
@@ -20,8 +20,8 @@
 </div>
 <label class="gift-extra-label" for="gift-extra">Что ещё важно? <span>необязательно</span></label>
 <textarea id="gift-extra" maxlength="700" placeholder="Например: всё необходимое у неё уже есть, не хочется дарить вещи для дома"></textarea>
-<button class="primary gift-submit" type="button">Подобрать идеи →</button><p class="gift-free">Бесплатно. Без регистрации.</p>
-</form></section>
+<button class="primary gift-submit" type="submit">Подобрать идеи →</button><p class="gift-free">Бесплатно. Без регистрации.</p><p id="gift-status" class="gift-status" role="status"></p>
+</form><div id="gift-results" class="gift-results" hidden></div></section>
 <section class="gift-benefits"><article><b>Не просто список подарков</b><span>Что подарить, чтобы понравилось.</span></article><article><b>В рамках бюджета</b><span>Не будем предлагать варианты, которые заведомо не подходят по цене.</span></article><article><b>Подберём по эмоциям</b><span>Практичный, душевный или для впечатления — будет из чего выбрать.</span></article></section>
 <section class="gift-examples"><p class="eyebrow">С чего начать</p><h2>Популярные ситуации</h2><div>
 <article class="gift-example"><b>Подарок женщине</b><span>Когда хочется порадовать, но «у неё всё есть»</span></article>
@@ -31,4 +31,20 @@
 </div></section>
 </main>
 <footer class="site-footer"><b>ЖИТЬ ПРОЩЕ</b><span>Полезные решения. Проще.</span></footer>
-</body></html>
+<script>
+const giftForm=document.getElementById('gift-form'),giftResults=document.getElementById('gift-results'),giftStatus=document.getElementById('gift-status');
+giftForm.addEventListener('submit',async function(e){
+ e.preventDefault();const person=document.getElementById('gift-person').value.trim();
+ if(!person){giftStatus.textContent='Расскажите, кому выбираете подарок.';return}
+ const btn=giftForm.querySelector('.gift-submit');btn.disabled=true;btn.textContent='Подбираем идеи…';giftStatus.textContent='';giftResults.hidden=true;
+ try{
+  const r=await fetch('https://jslurmtzygkrzqmqbtrc.supabase.co/functions/v1/gift-suggest',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({person:person,occasion:document.getElementById('gift-occasion').value,budget:document.getElementById('gift-budget').value,kind:document.getElementById('gift-kind').value,extra:document.getElementById('gift-extra').value.trim()})});
+  const data=await r.json();if(!r.ok||!Array.isArray(data.ideas))throw new Error('bad_response');
+  giftResults.innerHTML='<p class="eyebrow">Подобрали для вас</p><h2>5 идей подарка</h2><div class="gift-result-grid">'+data.ideas.map(function(x,i){return '<article><small>Идея '+(i+1)+'</small><h3>'+giftEsc(x.title)+'</h3><p>'+giftEsc(x.why)+'</p><div class="gift-price">'+giftEsc(x.price)+'</div><span>'+giftEsc(x.how)+'</span></article>'}).join('')+'</div>';
+  giftResults.hidden=false;giftResults.scrollIntoView({behavior:'smooth',block:'start'});
+  if(window.ym)ym(113177540,'reachGoal','gifts_generated');
+ }catch(err){giftStatus.textContent='Не получилось подобрать идеи. Попробуйте ещё раз.'}
+ finally{btn.disabled=false;btn.textContent='Подобрать идеи →'}
+});
+function giftEsc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+</script></body></html>
