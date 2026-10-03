@@ -43,4 +43,24 @@ form.addEventListener('submit',async e=>{
  finally{btn.disabled=false;btn.textContent='Предложить ответы →'}
 });
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script><script>
+const form=document.getElementById('answer-form'),results=document.getElementById('answer-results'),statusEl=document.getElementById('answer-status');
+form.addEventListener('submit',async function(e){
+ e.preventDefault();
+ const message=document.getElementById('incoming').value.trim();
+ if(!message){statusEl.textContent='Вставьте сообщение или опишите ситуацию.';return;}
+ const btn=form.querySelector('.answer-submit');
+ btn.disabled=true;btn.textContent='Подбираем варианты…';statusEl.textContent='';results.hidden=true;
+ try{
+  const r=await fetch('https://jslurmtzygkrzqmqbtrc.supabase.co/functions/v1/answer-suggest',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({message:message,relation:document.getElementById('relation').value,goal:document.getElementById('goal').value,tone:document.getElementById('tone').value})});
+  const data=await r.json();
+  if(!r.ok||!Array.isArray(data.answers)) throw new Error('bad_response');
+  results.innerHTML='<h2>Три варианта ответа</h2>'+data.answers.map(function(a,i){return '<article><small>Вариант '+(i+1)+(a.label?' · '+escapeHtml(a.label):'')+'</small><p>'+escapeHtml(a.text)+'</p><button type="button" class="copy-answer" data-i="'+i+'">Скопировать</button></article>';}).join('');
+  results.hidden=false;
+  results.querySelectorAll('.copy-answer').forEach(function(b){b.addEventListener('click',async function(){await navigator.clipboard.writeText(data.answers[Number(b.dataset.i)].text);b.textContent='Скопировано ✓';setTimeout(function(){b.textContent='Скопировать';},1600);});});
+  results.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(err){statusEl.textContent='Не получилось подобрать ответы. Попробуйте ещё раз.';}
+ finally{btn.disabled=false;btn.textContent='Предложить ответы →';}
+});
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 </script></body></html>
