@@ -17,15 +17,30 @@
 <label class="input-label" for="incoming">Что вам написали?</label>
 <textarea id="incoming" maxlength="2000" placeholder="Вставьте сообщение или опишите ситуацию"></textarea>
 <div class="answer-options">
-<label>Кому отвечаете?<select><option>Выберите вариант</option><option>Близкому человеку</option><option>Знакомому</option><option>По работе</option><option>Другое</option></select></label>
-<label>Что хотите?<select><option>Выберите вариант</option><option>Согласиться</option><option>Отказать</option><option>Объяснить</option><option>Договориться</option><option>Другое</option></select></label>
-<label>Как ответить?<select><option>Выберите вариант</option><option>Мягко</option><option>Спокойно</option><option>Уверенно</option><option>Коротко</option></select></label>
+<label>Кому отвечаете?<select id="relation"><option value="">Выберите вариант</option><option>Близкому человеку</option><option>Знакомому</option><option>По работе</option><option>Другое</option></select></label>
+<label>Что хотите?<select id="goal"><option value="">Выберите вариант</option><option>Согласиться</option><option>Отказать</option><option>Объяснить</option><option>Договориться</option><option>Другое</option></select></label>
+<label>Как ответить?<select id="tone"><option value="">Выберите вариант</option><option>Мягко</option><option>Спокойно</option><option>Уверенно</option><option>Коротко</option></select></label>
 </div>
-<button class="primary answer-submit" type="button">Предложить ответы →</button><p class="answer-free">Бесплатно. Без регистрации.</p>
-</form>
+<button class="primary answer-submit" type="submit">Предложить ответы →</button><p class="answer-free">Бесплатно. Без регистрации.</p><p id="answer-status" class="answer-status" role="status"></p>
+</form><div id="answer-results" class="answer-results" hidden></div>
 </section>
 <section class="answer-benefits"><article><b>Три готовых варианта</b><span>Можно выбрать тот, который больше похож на вас.</span></article><article><b>Подходящий тон</b><span>Мягко, спокойно, уверенно или коротко.</span></article><article><b>Можно сразу скопировать</b><span>И отправить в мессенджере или по почте.</span></article></section>
 <section class="answer-examples"><p class="eyebrow">Примеры ситуаций</p><h2>Когда сложно подобрать слова</h2><div><article><b>Ответить начальнику</b><span>«Просят выйти на работу в выходной, а я не хочу»</span></article><article><b>Вежливо отказать</b><span>«Приглашают в гости, но у меня нет времени»</span></article><article><b>Напомнить о долге</b><span>«Нужно тактично напомнить о возврате денег»</span></article><article><b>Ответить на грубость</b><span>«Написали грубое или неприятное сообщение»</span></article></div></section>
 </main>
 <footer class="site-footer"><b>ЖИТЬ ПРОЩЕ</b><span>Полезные решения. Проще.</span></footer>
-</body></html>
+<script>
+const form=document.getElementById('answer-form'),results=document.getElementById('answer-results'),statusEl=document.getElementById('answer-status');
+form.addEventListener('submit',async e=>{
+ e.preventDefault(); const message=document.getElementById('incoming').value.trim(); if(!message){statusEl.textContent='Вставьте сообщение или опишите ситуацию.';return}
+ const btn=form.querySelector('.answer-submit'); btn.disabled=true;btn.textContent='Подбираем варианты…';statusEl.textContent='';results.hidden=true;
+ try{
+  const r=await fetch('https://jslurmtzygkrzqmqbtrc.supabase.co/functions/v1/answer-suggest',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({message,relation:document.getElementById('relation').value,goal:document.getElementById('goal').value,tone:document.getElementById('tone').value})});
+  const data=await r.json(); if(!r.ok||!Array.isArray(data.answers)) throw new Error();
+  results.innerHTML='<h2>Три варианта ответа</h2>'+data.answers.map((a,i)=>'<article><small>Вариант '+(i+1)+(a.label?' · '+esc(a.label):'')+'</small><p>'+esc(a.text)+'</p><button type="button" class="copy-answer" data-i="'+i+'">Скопировать</button></article>').join('');
+  results.hidden=false; results.querySelectorAll('.copy-answer').forEach(b=>b.onclick=async()=>{await navigator.clipboard.writeText(data.answers[+b.dataset.i].text);b.textContent='Скопировано ✓';setTimeout(()=>b.textContent='Скопировать',1600)});
+  results.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch{statusEl.textContent='Не получилось подобрать ответы. Попробуйте ещё раз.'}
+ finally{btn.disabled=false;btn.textContent='Предложить ответы →'}
+});
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script></body></html>
