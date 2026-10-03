@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Не знаете, что ответить? — ЖИТЬ ПРОЩЕ</title>
 <meta name="description" content="Вставьте сообщение или опишите ситуацию — подберём три варианта ответа с учётом ваших обстоятельств, цели и нужного тона.">
-<link rel="canonical" href="https://zhitproshche.ru/otvetit/"><link rel="stylesheet" href="/assets/styles.css?v=20261003-2">
+<link rel="canonical" href="https://zhitproshche.ru/otvetit/"><link rel="stylesheet" href="/assets/styles.css?v=20261003-3">
 <script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113177540','ym');ym(113177540,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:true,trackLinks:true});</script>
 </head>
 <body>
@@ -25,25 +25,10 @@
 </form><div id="answer-results" class="answer-results" hidden></div>
 </section>
 <section class="answer-benefits"><article><b>Три готовых варианта</b><span>Можно выбрать тот, который больше похож на вас.</span></article><article><b>Подходящий тон</b><span>Мягко, спокойно, уверенно или коротко.</span></article><article><b>Можно сразу скопировать</b><span>И отправить в мессенджере или по почте.</span></article></section>
-<section class="answer-examples"><p class="eyebrow">Примеры ситуаций</p><h2>Когда сложно подобрать слова</h2><div><article><b>Ответить начальнику</b><span>«Просят выйти на работу в выходной, а я не хочу»</span></article><article><b>Вежливо отказать</b><span>«Приглашают в гости, но у меня нет времени»</span></article><article><b>Напомнить о долге</b><span>«Нужно тактично напомнить о возврате денег»</span></article><article><b>Ответить на грубость</b><span>«Написали грубое или неприятное сообщение»</span></article></div></section>
+<section class="answer-examples"><p class="eyebrow">Примеры ситуаций</p><h2>Когда сложно подобрать слова</h2><div><article class="answer-example" data-text="Просят выйти на работу в выходной, а я не хочу"><b>Ответить начальнику</b><span>«Просят выйти на работу в выходной, а я не хочу»</span><small>Попробовать →</small></article><article class="answer-example" data-text="Приглашают в гости, но у меня нет времени"><b>Вежливо отказать</b><span>«Приглашают в гости, но у меня нет времени»</span><small>Попробовать →</small></article><article class="answer-example" data-text="Нужно тактично напомнить о возврате денег"><b>Напомнить о долге</b><span>«Нужно тактично напомнить о возврате денег»</span><small>Попробовать →</small></article><article class="answer-example" data-text="Написали грубое или неприятное сообщение"><b>Ответить на грубость</b><span>«Написали грубое или неприятное сообщение»</span><small>Попробовать →</small></article></div></section>
 </main>
 <footer class="site-footer"><b>ЖИТЬ ПРОЩЕ</b><span>Полезные решения. Проще.</span></footer>
 <script>
-const form=document.getElementById('answer-form'),results=document.getElementById('answer-results'),statusEl=document.getElementById('answer-status');
-form.addEventListener('submit',async e=>{
- e.preventDefault(); const message=document.getElementById('incoming').value.trim(); if(!message){statusEl.textContent='Вставьте сообщение или опишите ситуацию.';return}
- const btn=form.querySelector('.answer-submit'); btn.disabled=true;btn.textContent='Подбираем варианты…';statusEl.textContent='';results.hidden=true;
- try{
-  const r=await fetch('https://jslurmtzygkrzqmqbtrc.supabase.co/functions/v1/answer-suggest',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({message,relation:document.getElementById('relation').value,goal:document.getElementById('goal').value,tone:document.getElementById('tone').value})});
-  const data=await r.json(); if(!r.ok||!Array.isArray(data.answers)) throw new Error();
-  results.innerHTML='<h2>Три варианта ответа</h2>'+data.answers.map((a,i)=>'<article><small>Вариант '+(i+1)+(a.label?' · '+esc(a.label):'')+'</small><p>'+esc(a.text)+'</p><button type="button" class="copy-answer" data-i="'+i+'">Скопировать</button></article>').join('');
-  results.hidden=false; results.querySelectorAll('.copy-answer').forEach(b=>b.onclick=async()=>{await navigator.clipboard.writeText(data.answers[+b.dataset.i].text);b.textContent='Скопировано ✓';setTimeout(()=>b.textContent='Скопировать',1600)});
-  results.scrollIntoView({behavior:'smooth',block:'start'});
- }catch{statusEl.textContent='Не получилось подобрать ответы. Попробуйте ещё раз.'}
- finally{btn.disabled=false;btn.textContent='Предложить ответы →'}
-});
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-</script><script>
 const form=document.getElementById('answer-form'),results=document.getElementById('answer-results'),statusEl=document.getElementById('answer-status');
 form.addEventListener('submit',async function(e){
  e.preventDefault();
@@ -62,5 +47,6 @@ form.addEventListener('submit',async function(e){
  }catch(err){statusEl.textContent='Не получилось подобрать ответы. Попробуйте ещё раз.';}
  finally{btn.disabled=false;btn.textContent='Предложить ответы →';}
 });
+document.querySelectorAll('.answer-example').forEach(function(card){card.addEventListener('click',function(){document.getElementById('incoming').value=card.dataset.text;document.getElementById('incoming').focus();document.querySelector('.answer-generator').scrollIntoView({behavior:'smooth',block:'start'});});});
 function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 </script></body></html>
