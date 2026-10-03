@@ -2,7 +2,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Как выбрать из нескольких вариантов — ЖИТЬ ПРОЩЕ</title>
 <meta name="description" content="Опишите, между чем выбираете и что для вас важно. Поможем сравнить варианты по понятным критериям.">
-<link rel="canonical" href="https://zhitproshche.ru/vybrat/"><link rel="stylesheet" href="/assets/styles.css?v=20261003-6">
+<link rel="canonical" href="https://zhitproshche.ru/vybrat/"><link rel="stylesheet" href="/assets/styles.css?v=20261003-7">
 <script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113177540','ym');ym(113177540,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:true,trackLinks:true});</script>
 </head><body><noscript><div><img src="https://mc.yandex.ru/watch/113177540" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <header class="site-header"><a class="brand brand-logo" href="/" aria-label="Жить проще"><img src="/assets/logo-zhit-proshche.webp?v=1" alt="Жить проще"></a><nav><a href="/prigotovit/">Приготовить</a><a href="/otvetit/">Ответить</a><a href="/podarit/">Подарить</a><a class="current" href="/vybrat/">Выбрать</a></nav></header>
@@ -17,8 +17,15 @@
 </div>
 <label class="choose-extra-label" for="choose-extra">Что ещё важно? <span>необязательно</span></label>
 <textarea id="choose-extra" maxlength="900" placeholder="Например: бюджет до 50 000 ₽, важна простота использования, не хочу переплачивать за лишние функции"></textarea>
-<button class="primary choose-submit" type="button">Сравнить варианты →</button><p class="choose-free">Бесплатно. Без регистрации.</p>
-</form></section>
+<button class="primary choose-submit" type="submit">Сравнить варианты →</button><p class="choose-free">Бесплатно. Без регистрации.</p><p id="choose-status" class="choose-status" role="status"></p>
+</form><div id="choose-results" class="choose-results" hidden></div></section>
 <section class="choose-benefits"><article><b>По понятным критериям</b><span>Без изучения технических характеристик и отзывов.</span></article><article><b>С учётом ваших условий</b><span>Цена, удобство, надёжность и то, что важно именно вам.</span></article><article><b>Покажем различия</b><span>Чтобы было видно, за что вы платите и чем варианты отличаются.</span></article></section>
 <section class="choose-examples"><p class="eyebrow">Что можно сравнить</p><h2>Практически любой выбор</h2><div><article><b>Два смартфона</b><span>Стоит ли переплачивать за более дорогую модель?</span></article><article><b>Отели для поездки</b><span>Что лучше по расположению, условиям и цене?</span></article><article><b>Тарифы и услуги</b><span>Где действительно выгоднее, а где просто больше опций?</span></article><article><b>Технику для дома</b><span>Какая модель лучше подходит под ваши задачи?</span></article></div></section>
-</main><footer class="site-footer"><b>ЖИТЬ ПРОЩЕ</b><span>Полезные решения. Проще.</span></footer></body></html>
+</main><footer class="site-footer"><b>ЖИТЬ ПРОЩЕ</b><span>Полезные решения. Проще.</span></footer><script>
+const cf=document.getElementById('choose-form'),cr=document.getElementById('choose-results'),cs=document.getElementById('choose-status');
+cf.addEventListener('submit',async e=>{e.preventDefault();const options=document.getElementById('choose-options').value.trim();if(options.length<5){cs.textContent='Напишите, между чем выбираете.';return}const btn=cf.querySelector('.choose-submit');btn.disabled=true;btn.textContent='Сравниваем…';cs.textContent='';cr.hidden=true;
+try{const r=await fetch('https://jslurmtzygkrzqmqbtrc.supabase.co/functions/v1/compare-suggest',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({options,priority:document.getElementById('choose-priority').value,forWhom:document.getElementById('choose-for').value,extra:document.getElementById('choose-extra').value.trim()})});const d=await r.json();if(!r.ok||!Array.isArray(d.options))throw 0;
+cr.innerHTML='<p class="eyebrow">Сравнение</p><h2>'+esc(d.summary)+'</h2><div class="compare-criteria"><b>Что учитываем:</b> '+d.criteria.map(esc).join(' · ')+'</div><div class="compare-grid">'+d.options.map(x=>'<article><h3>'+esc(x.name)+'</h3><b>Сильные стороны</b><ul>'+x.strengths.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul><b>Что учесть</b><ul>'+x.weaknesses.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul><p><strong>Подойдёт, если:</strong> '+esc(x.best_for)+'</p></article>').join('')+'</div><div class="compare-conclusion"><b>Итог</b><p>'+esc(d.conclusion)+'</p></div>';cr.hidden=false;cr.scrollIntoView({behavior:'smooth',block:'start'});if(window.ym)ym(113177540,'reachGoal','comparison_generated');
+}catch(_){cs.textContent='Не получилось сравнить варианты. Попробуйте ещё раз.'}finally{btn.disabled=false;btn.textContent='Сравнить варианты →'}});
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script></body></html>
