@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<rect width="64" height="64" rx="15" fill="#fbf8f1"/>
+<path d="M45 7v10M53 11l-7 7M57 21H47" fill="none" stroke="#ff7a00" stroke-width="5" stroke-linecap="round"/>
+<text x="9" y="46" font-family="Arial,sans-serif" font-size="31" font-weight="800" fill="#315c38">Ж</text>
+<path d="M37 48c8-4 13-10 17-18" fill="none" stroke="#3f6f45" stroke-width="5" stroke-linecap="round"/>
+</svg>
