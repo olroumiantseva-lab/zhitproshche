@@ -210,3 +210,6 @@
 /* SEO related ideas interaction */
 .seo-links a{transition:background-color .18s ease,transform .18s ease,box-shadow .18s ease,border-color .18s ease}
 .seo-links a:hover,.seo-links a:focus-visible{background:var(--sage);border-color:#cbd8c5;transform:translateY(-3px);box-shadow:var(--shadow);text-decoration:none}
+
+/* More breathing room under related-ideas heading */
+.seo-links h2{margin-bottom:22px}
