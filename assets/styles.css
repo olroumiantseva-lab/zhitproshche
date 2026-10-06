@@ -257,3 +257,14 @@
 .home-products-add{display:flex;flex-wrap:wrap;gap:9px}
 .home-products-add input{flex:1;min-width:160px;border:1px solid var(--line);border-radius:12px;padding:11px 14px;background:#fff;font:inherit}
 @media print{#shopping-to-home{display:none!important}}
+
+
+/* Main cooking form: servings and excluded products */
+.home-exclusions{margin:16px 0}.home-exclusions label{display:block;font-weight:700;margin-bottom:8px}.home-exclusions input{width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--card);border-radius:13px;padding:12px 14px;font:inherit}
+#food-form>fieldset{border:0;padding:0;margin:18px 0 14px;min-width:0}
+#food-form>fieldset legend{font-weight:800;margin-bottom:11px;padding:0}
+#food-form>fieldset .chips{display:flex;flex-wrap:wrap;gap:10px}
+#food-form>fieldset .chips label{display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:13px;border:1px solid var(--line);background:var(--card);font-weight:700;cursor:pointer;transition:background-color .18s ease,transform .18s ease}
+#food-form>fieldset .chips label:hover{transform:translateY(-2px);background:var(--sage)}
+#food-form>fieldset .chips label:has(input:checked){background:var(--sage);border-color:#a9c9a5;color:var(--green2)}
+#food-form>fieldset .chips input{accent-color:var(--green)}
