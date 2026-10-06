@@ -1,0 +1,25 @@
+{
+  "name": "zhitproshche",
+  "version": "1.0.0",
+  "description": "Практичные помощники для повседневных задач.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:e2e": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olroumiantseva-lab/zhitproshche.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/olroumiantseva-lab/zhitproshche/issues"
+  },
+  "homepage": "https://github.com/olroumiantseva-lab/zhitproshche#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}
