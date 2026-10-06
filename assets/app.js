@@ -19,7 +19,8 @@
   form.addEventListener("submit",e=>{e.preventDefault();run()});retry.addEventListener("click",()=>{metric("recipes_regenerated",{request_id:currentRequestId||""});run()});
   // SEO recipe forms pass ingredients to the main generator: start the selection automatically.
   const qs=new URLSearchParams(window.location.search);
-  const incoming=qs.get("ingredients");
+  let incoming=qs.get("ingredients");
+  if(!incoming){try{incoming=sessionStorage.getItem("zhitpro_food_prefill")}catch(e){}}
   if(incoming&&incoming.trim()){
     document.querySelector("#ingredients").value=incoming.trim().slice(0,1000);
     const requestedTime=Number(qs.get("max_time"));
@@ -29,7 +30,6 @@
       if(option)option.checked=true;
     }
     try{sessionStorage.removeItem("zhitpro_food_prefill")}catch(e){}
-    history.replaceState(null,"",window.location.pathname);
     run();
   }
 })();
