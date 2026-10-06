@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /node_modules/
+Disallow: /e2e/
+Disallow: /playwright-report/
+Disallow: /test-results/
 
 Sitemap: https://zhitproshche.ru/sitemap.xml
