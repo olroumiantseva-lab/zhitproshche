@@ -222,3 +222,13 @@
 .quick-time label:has(input:checked){background:var(--sage);color:var(--green2)}
 .quick-time input{accent-color:var(--green)}
 @media(max-width:820px){.quick-form{grid-template-columns:1fr}.quick-time{justify-content:flex-start}}
+
+/* Chicken recipe cut selector */
+.chicken-form{grid-template-columns:minmax(0,1fr) auto;align-items:stretch}
+.chicken-cut{grid-column:1/-1;display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:12px 15px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+.chicken-cut>span{font-weight:800;margin-right:8px}
+.chicken-cut label{display:inline-flex;align-items:center;gap:5px;padding:8px 11px;border-radius:12px;font-weight:750;cursor:pointer;transition:background-color .18s ease,transform .18s ease}
+.chicken-cut label:has(input:checked){background:var(--sage);color:var(--green2)}
+.chicken-cut label:hover{background:var(--sage);transform:translateY(-2px)}
+.chicken-cut input{accent-color:var(--green)}
+@media(max-width:820px){.chicken-form{grid-template-columns:1fr}.chicken-cut>span{width:100%}}
