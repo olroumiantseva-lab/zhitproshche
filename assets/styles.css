@@ -282,3 +282,10 @@
 .cook-page-unified .generator{padding-top:14px}
 @media(max-width:820px){.cook-page-unified .cook-hero-unified{grid-template-columns:1fr;grid-template-areas:"copy" "photo" "benefits"}.cook-hero-unified .seo-recipe-photo img{height:300px}}
 @media(max-width:520px){.cook-hero-unified h1{font-size:44px}.cook-hero-unified .seo-recipe-photo img{height:235px}}
+
+
+/* Three equal utility cards on desktop */
+.cook-page .utility-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cook-page .utility-grid>.utility-link{min-width:0}
+.cook-page .utility-people-art{display:flex;align-items:center;justify-content:center;flex-shrink:0;align-self:stretch;min-height:135px;background:linear-gradient(135deg,#e7eee1,#f6eadc);border-radius:16px;color:var(--green);font-size:clamp(24px,2.4vw,36px);font-weight:850;letter-spacing:-.05em}
+@media(max-width:820px){.cook-page .utility-grid{grid-template-columns:1fr}}
