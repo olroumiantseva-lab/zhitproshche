@@ -17,4 +17,19 @@
   cards.addEventListener("click",e=>{const b=e.target.closest(".recipe-open");if(b){const idx=Number(b.dataset.index);metric("recipe_opened",{request_id:currentRequestId||"",recipe_index:idx+1});renderRecipe(suggestions[idx])}});
   async function run(){const p=payload();if(!p.ingredients.length){status.textContent="Напишите хотя бы один продукт.";return}metric("cook_start",{ingredients_count:p.ingredients.length,people:p.people,max_time:p.max_time||0,has_excluded:p.excluded.length>0});const api=window.ZHITPRO_CONFIG?.apiUrl;if(!api){status.textContent="Сервис временно недоступен.";return}status.textContent="Подбираем блюда…";results.hidden=true;if(recipe)recipe.hidden=true;try{const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),45000);let r;try{r=await fetch(api,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(p),signal:controller.signal})}finally{clearTimeout(timer)}let data={};try{data=await r.json()}catch{}if(r.status===429||data.error==="daily_limit"){status.textContent="На сегодня бесплатные подборки закончились. Возвращайтесь завтра — лимит обновится автоматически.";return}if(!r.ok)throw new Error("API "+r.status);render(data);status.textContent=""}catch(e){console.error("food-suggest failed",e);status.textContent=e?.name==="AbortError"?"Сервер не ответил за 45 секунд. Обновите страницу и попробуйте ещё раз.":"Не получилось связаться с сервисом. Ошибка: "+(e?.message||"неизвестная ошибка");}}
   form.addEventListener("submit",e=>{e.preventDefault();run()});retry.addEventListener("click",()=>{metric("recipes_regenerated",{request_id:currentRequestId||""});run()});
+  // SEO recipe forms pass ingredients to the main generator: start the selection automatically.
+  const qs=new URLSearchParams(window.location.search);
+  const incoming=qs.get("ingredients");
+  if(incoming&&incoming.trim()){
+    document.querySelector("#ingredients").value=incoming.trim().slice(0,1000);
+    const requestedTime=Number(qs.get("max_time"));
+    if(requestedTime>0){
+      const timeValue=requestedTime<=20?"20":"40";
+      const option=form.querySelector('input[name="max_time"][value="'+timeValue+'"]');
+      if(option)option.checked=true;
+    }
+    try{sessionStorage.removeItem("zhitpro_food_prefill")}catch(e){}
+    history.replaceState(null,"",window.location.pathname);
+    run();
+  }
 })();
