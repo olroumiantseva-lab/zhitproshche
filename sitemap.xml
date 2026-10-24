@@ -70,4 +70,40 @@
     <loc>https://zhitproshche.ru/chto-prigotovit-iz-kapusty/</loc>
     <lastmod>2026-10-19</lastmod>
   </url>
+  <url>
+    <loc>https://zhitproshche.ru/chto-prigotovit-na-zavtrak/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhitproshche.ru/chto-prigotovit-na-obed/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhitproshche.ru/chto-prigotovit-na-perekus/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhitproshche.ru/chto-prigotovit-k-chayu/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhitproshche.ru/chto-prigotovit-dlya-gostey/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhitproshche.ru/chto-prigotovit-na-prazdnichnyy-stol/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
