@@ -1,0 +1,11 @@
+name = "zhitproshche-food"
+main = "src/worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+OPENAI_MODEL = "gpt-4.1-mini"
+
+# Bind one KV namespace as RATE_LIMIT in the Cloudflare dashboard or via wrangler.
+# Add [[kv_namespaces]] with binding = "RATE_LIMIT" and the namespace id.
+# Configure OPENAI_API_KEY as a Worker Secret, never as a [vars] value.
