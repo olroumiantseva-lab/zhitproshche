@@ -64,16 +64,36 @@
  .travel-page .travel-item{border-color:#aaa}
  .travel-page .seo-rich-copy>article{break-inside:avoid}
 }
+
+.travel-page .travel-promo{margin:26px 0;padding:28px 30px;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,360px);gap:24px;align-items:center;border-radius:24px;background:linear-gradient(110deg,#e9f1e6,#f9f3e9);border:1px solid #cbdac6}
+.travel-page .travel-promo-bottom{background:linear-gradient(110deg,#f7efe4,#e9f2e9)}
+.travel-page .travel-promo h2{font-size:clamp(26px,2.8vw,34px);margin:0 0 10px}
+.travel-page .travel-promo p:not(.eyebrow){margin:0;line-height:1.65;color:var(--muted)}
+.travel-page .travel-cta-buttons{display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.travel-page .travel-cta-buttons a{text-decoration:none;text-align:center;display:block;padding:14px 17px;border-radius:14px;font-weight:800;line-height:1.35}
+.travel-page .travel-secondary{color:var(--green2);background:#fff;border:1px solid var(--green)}
+.travel-page .travel-secondary:hover{background:var(--sage)}
+.travel-page .travel-related-links{margin:40px 0 0}
+.travel-page .travel-related-links h2{font-size:clamp(27px,3vw,35px)}
+.travel-page .travel-related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.travel-page .travel-related-grid a{display:flex;flex-direction:column;gap:8px;padding:22px;border-radius:17px;background:var(--card);border:1px solid var(--line);text-decoration:none;color:var(--ink);box-shadow:var(--shadow)}
+.travel-page .travel-related-grid a:hover{border-color:var(--green)}
+.travel-page .travel-related-grid strong{font-size:18px}
+.travel-page .travel-related-grid span{color:var(--muted);line-height:1.5}
+.travel-page .travel-hero-visual .travel-suitcase{position:relative}
+.travel-page .travel-hero-visual .travel-suitcase:after{content:"✓";position:absolute;right:-14px;top:-18px;width:42px;height:42px;border-radius:50%;background:var(--green);color:white;display:grid;place-items:center;font-size:22px;box-shadow:var(--shadow)}
+@media(max-width:760px){.travel-page .travel-promo{grid-template-columns:1fr;padding:22px 18px}.travel-page .travel-related-grid{grid-template-columns:1fr}}
+@media print{.travel-page .travel-promo,.travel-page .travel-related-links{display:none!important}}
 </style></head>
 <body>
 <noscript><div><img src="https://mc.yandex.ru/watch/113177540" style="position:absolute; left:-9999px;" alt=""></div></noscript>
 <header class="site-header"><a class="brand brand-logo" href="/" aria-label="Жить проще"><img src="/assets/logo-zhit-proshche.webp?v=1" alt="Жить проще"></a><nav aria-label="Основная навигация"><a href="/prigotovit/">Приготовить</a><a href="/otvetit/">Ответить</a><a href="/podarit/">Подарить</a><a href="/vybrat/">Выбрать</a></nav></header>
 
 <main class="seo-recipe travel-page">
- <nav class="seo-breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">›</span><span>Что взять в поездку</span></nav>
+ <nav class="seo-breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">›</span><a href="/esche/">Ещё</a><span aria-hidden="true">›</span><span>Что взять в поездку</span></nav>
  <section class="seo-recipe-hero" aria-labelledby="travel-title">
   <div class="seo-recipe-copy">
-   <p class="eyebrow">ЖИТЬ ПРОЩЕ · ПОЛЕЗНЫЕ СПИСКИ</p>
+   <p class="eyebrow">ЕЩЁ · ЧЕК-ЛИСТЫ И ПЛАНЫ</p>
    <h1 class="dinner-title" id="travel-title">Что взять в поездку: список вещей без лишнего багажа</h1>
    <p class="lead">Нужное — с собой, лишнее — дома. Отмечайте собранное, сохраняйте список и проверяйте сумку перед выходом.</p>
    <p class="seo-handnote">Список можно изменить под маршрут и формат отдыха</p>
@@ -82,6 +102,7 @@
    <div class="travel-suitcase"><b>Собираемся в дорогу</b><span>✓ Документы и билеты</span><span>✓ Телефон и зарядка</span><span>✓ Одежда и личные вещи</span></div>
   </div>
  </section>
+ <section class="travel-promo travel-promo-top" aria-label="Полезные сервисы для поездки"><div><p class="eyebrow">ЖИТЬ ПРОЩЕ · Бесплатные инструменты</p><h2>Упростите подготовку к поездке</h2><p>Сравните варианты проживания или подготовьте сообщение хозяину жилья — прямо на сайте, без поиска шаблонов.</p></div><div class="travel-cta-buttons"><a class="primary" href="/vybrat/">Сравнить отели и варианты →</a><a class="travel-secondary" href="/otvetit/">Написать сообщение хозяину жилья →</a></div></section>
  <section class="travel-checklist" aria-labelledby="checklist-title">
   <p class="eyebrow">Быстрый старт</p>
   <h2 id="checklist-title">Чек-лист вещей в поездку</h2>
@@ -107,7 +128,8 @@
     <article id="section-7"><h2>Что добавить под формат поездки</h2><p>На море или к бассейну: купальные вещи, пляжную обувь, пакет для мокрых вещей и полотенце, если своё потребуется. Средства защиты от солнца подбирайте с учётом условий и инструкции к средству.</p><p>В командировку: рабочее устройство, зарядку, необходимые материалы и одежду под запланированные встречи.</p><p>С ребёнком: привычные средства ухода, сменную одежду в доступной сумке и знакомое занятие для дороги. Питание и личные средства определяйте по возрасту и индивидуальным потребностям; универсальный медицинский набор здесь не предлагается.</p><p>Для отдыха на природе составьте отдельный список личных вещей под запланированные занятия. Не используйте бытовой чек-лист этой статьи как полный перечень походного снаряжения.</p></article>
     <article id="section-8"><h2>Как убрать лишнее и проверить сумку перед выходом</h2><p>Для каждой дополнительной вещи закончите фразу: «Я использую это, когда…». Если конкретного сценария нет, отложите её и оцените необходимость ещё раз. Не сокращайте личные медицинские средства по этому принципу без обсуждения с врачом.</p><p>Уберите дубли: несколько похожих предметов одежды, устройства с одной задачей и средства, наличие которых на месте уже подтверждено.</p><ul><li>Положите собранную сумку рядом со списком и проверьте каждую отметку.</li><li>Если едете перевозчиком, сопоставьте багаж с условиями своего билета: универсальных размеров, веса и правил содержимого эта статья не задаёт.</li><li>Заведите отдельную заметку «положить перед выходом»: телефон, используемая зарядка, щётка и другие вещи, которые пока нельзя убрать.</li><li>В конце проверьте документы по своему перечню, средства оплаты и адрес назначения.</li></ul></article>
  </section>
- <section class="seo-action travel-related"><div><p class="eyebrow">Ещё один полезный инструмент</p><h2>Выбираете жильё или транспорт?</h2><p>Сравните несколько вариантов с учётом цены, удобства и ваших условий.</p></div><a class="primary" href="/vybrat/">Сравнить варианты →</a></section>
+ <section class="travel-promo travel-promo-bottom" aria-label="Полезные сервисы для поездки"><div><p class="eyebrow">ЖИТЬ ПРОЩЕ · Бесплатные инструменты</p><h2>Ещё дела перед поездкой?</h2><p>Если осталось выбрать жильё или уточнить детали заселения, воспользуйтесь помощниками сайта.</p></div><div class="travel-cta-buttons"><a class="primary" href="/vybrat/">Сравнить отели и варианты →</a><a class="travel-secondary" href="/otvetit/">Написать сообщение хозяину жилья →</a></div></section>
+ <section class="travel-related-links" aria-labelledby="travel-related-title"><p class="eyebrow">Полезное рядом</p><h2 id="travel-related-title">Другие инструменты и списки</h2><div class="travel-related-grid"><a href="/vybrat/"><strong>Сравнить варианты</strong><span>Выбирайте отели, поездки и услуги по своим критериям</span></a><a href="/otvetit/"><strong>Подготовить ответ</strong><span>Уточните заселение или условия бронирования</span></a><a href="/spisok-pokupok/"><strong>Список покупок</strong><span>Соберите отдельный список покупок перед дорогой</span></a><a href="/podarit/"><strong>Подобрать подарок</strong><span>Если едете в гости, найдите идею подарка</span></a></div></section>
 </main>
 <footer class="site-footer"><b>ЖИТЬ ПРОЩЕ</b><span>Полезные решения. Проще.</span></footer>
 
